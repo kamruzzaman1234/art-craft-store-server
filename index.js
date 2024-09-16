@@ -59,25 +59,31 @@ async function run() {
       res.send(resultId)
     })
 
-    // app.put('/addProduct/:id', async(req,res)=>{
-    //     const id = req.params.id 
-    //     const filter = {_id: new ObjectId(id)}
-    //     const options = { upsert: true}
+    app.put('/addProduct/:id', async(req,res)=>{
+        const id = req.params.id 
+        const filter = {_id: new ObjectId(id)}
+        const options = { upsert: true}
 
-    //     const updateProduct = req.body
-    //     const update1 = {
-    //       $set: {
-    //         image_url: updateProduct.image_url,
-    //         product_name: updateProduct.product_name,
-    //         description: updateProduct.description,
-    //         rating: updateProduct.rating,
-    //         price: updateProduct.price 
-    //       }
-    //     }
-    //     const updateResult = await craftCollection.updateOne(filter, update1, options)
-    //     res.send(updateResult)
-    //     console.log('Update Result', updateResult)
-    // })
+        const updateProduct = req.body
+        const update1 = {
+          $set: {
+            user_displayName: updateProduct.user_displayName,
+            user_email: updateProduct.user_email,
+            craft_name: updateProduct.craft_name,
+            category: updateProduct.category,
+            stock_status: updateProduct.stock_status,
+            processing_time: updateProduct.processing_time,
+            image_url: updateProduct.image_url,
+            description: updateProduct.description,
+            rating: updateProduct.rating,
+            price: updateProduct.price
+
+          }
+        }
+        const updateResult = await craftCollection.updateOne(filter, update1, options)
+        res.send(updateResult)
+        console.log('Update Result', updateResult)
+    })
 
     app.delete('/addProduct/:id', async(req,res)=>{
       const id = req.params.id 
